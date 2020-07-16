@@ -58,7 +58,7 @@ This can come in useful for unit tests mocks.
 		t.Error(err)
 	}
 	// act
-	res, err := httpfrominput.ResponseFromReader(f)
+	res, err := httptestfixtures.ResponseFromReader(f)
 	// assert
 	assert.Nil(t, err)
 

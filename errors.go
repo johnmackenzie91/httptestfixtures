@@ -1,4 +1,4 @@
-package httpfrominput
+package httptestfixtures
 
 import "errors"
 

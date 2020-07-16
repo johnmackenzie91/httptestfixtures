@@ -1,4 +1,4 @@
-package httpfrominput_test
+package httptestfixtures_test
 
 import (
 	"io/ioutil"
@@ -7,7 +7,7 @@ import (
 	"strings"
 	"testing"
 
-	"bitbucket.org/johnmackenzie91/httpfrominput"
+	"github.com/johnmackenzie91/httptestfixtures"
 	"github.com/stretchr/testify/assert"
 )
 
@@ -18,7 +18,7 @@ func TestResponseFromFile_ReturnsAsExpected(t *testing.T) {
 		t.Error(err)
 	}
 	// act
-	res, err := httpfrominput.ResponseFromReader(f)
+	res, err := httptestfixtures.ResponseFromReader(f)
 	// assert
 	assert.Nil(t, err)
 	defer res.Body.Close()
@@ -44,7 +44,7 @@ func TestResponseFromFile_ReturnsAsExpected_2(t *testing.T) {
 		t.Error(err)
 	}
 	// act
-	res, err := httpfrominput.ResponseFromReader(f)
+	res, err := httptestfixtures.ResponseFromReader(f)
 	// assert
 	assert.Nil(t, err)
 	defer res.Body.Close()
