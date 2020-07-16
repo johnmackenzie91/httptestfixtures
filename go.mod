@@ -1,4 +1,4 @@
-module github.com/johnmackenzie91/httpfrominput
+module github.com/johnmackenzie91/httptestfixtures
 
 go 1.13
 
