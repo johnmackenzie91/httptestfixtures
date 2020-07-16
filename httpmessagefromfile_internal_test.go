@@ -13,16 +13,16 @@ func Test_parseStatusCode(t *testing.T) {
 		expectedOut statusCode
 		expectedErr error
 	}{
-		//{
-		//	name:  "status ok",
-		//	input: "HTTP/1.1 200 OK",
-		//	expectedOut: statusCode{
-		//		StatusCode: 200,
-		//		Status:     "200 OK",
-		//	},
-		//},
 		{
-			name:  "status ok",
+			name:  "http version 1.somthing ok",
+			input: "HTTP/1.1 200 OK",
+			expectedOut: statusCode{
+				StatusCode: 200,
+				Status:     "200 OK",
+			},
+		},
+		{
+			name:  "http version 2",
 			input: "HTTP/2 200 ",
 			expectedOut: statusCode{
 				StatusCode: 200,
@@ -34,7 +34,6 @@ func Test_parseStatusCode(t *testing.T) {
 	for _, tc := range testCases {
 		t.Run(tc.name, func(t *testing.T) {
 			// arrange
-
 			// act
 			res, err := parseStatusCode(tc.input)
 

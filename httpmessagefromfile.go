@@ -6,9 +6,25 @@ import (
 	"io"
 	"io/ioutil"
 	"net/http"
+	"os"
 	"regexp"
 	"strings"
+	"testing"
 )
+
+// MustLoadRequest is a helper method that loads a http response from a http response file,
+// if the file does not exist func fails quickly.
+func MustLoadRequest(t testing.T, filePath string) *http.Response {
+	f, err := os.Open(filePath)
+	if err != nil {
+		t.Fatal(err)
+	}
+	res, err := ResponseFromReader(f)
+	if err != nil {
+		t.Fatal(err)
+	}
+	return res
+}
 
 // ResponseFromReader a reader and attempts to parse contents into a *http.Response
 func ResponseFromReader(r io.Reader) (*http.Response, error) {

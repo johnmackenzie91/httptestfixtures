@@ -1,4 +1,4 @@
-module bitbucket.org/johnmackenzie91/httpfrominput
+module github.com/johnmackenzie91/httpfrominput
 
 go 1.13
 

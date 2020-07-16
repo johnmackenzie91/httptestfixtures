@@ -21,6 +21,7 @@ func TestResponseFromFile_ReturnsAsExpected(t *testing.T) {
 	res, err := httpfrominput.ResponseFromReader(f)
 	// assert
 	assert.Nil(t, err)
+	defer res.Body.Close()
 
 	content := strings.NewReader("Hello world!")
 	body := ioutil.NopCloser(content)
@@ -46,6 +47,7 @@ func TestResponseFromFile_ReturnsAsExpected_2(t *testing.T) {
 	res, err := httpfrominput.ResponseFromReader(f)
 	// assert
 	assert.Nil(t, err)
+	defer res.Body.Close()
 
 	content := strings.NewReader("{\"data\": []}")
 	body := ioutil.NopCloser(content)
