@@ -20,6 +20,15 @@ Into a *http.Response struct;
 		},
 		Body: ioutil.NopCloser(strings.NewReader(`{"msg": "Hello world!"}`)),
 	}
-```
+``` 
 
-Allowing for easier unit testing, please see [examples](https://github.com/johnmackenzie91/httptestfixtures/tree/master/examples).
+Allowing for easier unit testing of api clients.
+
+You can use curl to download to hit your api and download the entire response
+
+```
+curl -i https://yourapi.com/endpointone > ./testdata/endpointone.txt
+```
+Then use that response as a accurate representation of how your endpoint will respond and create a unit test around that.
+Please see the [examples](https://github.com/johnmackenzie91/httptestfixtures/tree/master/examples).
+
