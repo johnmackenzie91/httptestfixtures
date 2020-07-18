@@ -14,7 +14,7 @@ import (
 
 // MustLoadRequest is a helper method that loads a http response from a http response file,
 // if the file does not exist func fails quickly.
-func MustLoadRequest(t testing.T, filePath string) *http.Response {
+func MustLoadRequest(t *testing.T, filePath string) *http.Response {
 	f, err := os.Open(filePath)
 	if err != nil {
 		t.Fatal(err)

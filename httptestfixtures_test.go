@@ -23,7 +23,7 @@ func TestResponseFromFile_ReturnsAsExpected(t *testing.T) {
 	assert.Nil(t, err)
 	defer res.Body.Close()
 
-	content := strings.NewReader("Hello world!")
+	content := strings.NewReader(`{"msg": "Hello world!"}`)
 	body := ioutil.NopCloser(content)
 
 	expected := &http.Response{
