@@ -23,16 +23,13 @@ func TestResponseFromFile_ReturnsAsExpected(t *testing.T) {
 	assert.Nil(t, err)
 	defer res.Body.Close()
 
-	content := strings.NewReader(`{"msg": "Hello world!"}`)
-	body := ioutil.NopCloser(content)
-
 	expected := &http.Response{
 		Status:     "200 OK",
 		StatusCode: 200,
 		Header: http.Header{
 			"Date": []string{"Sun, 10 Oct 2010 23:26:07 GMT"},
 		},
-		Body: body,
+		Body: ioutil.NopCloser(strings.NewReader(`{"msg": "Hello world!"}`)),
 	}
 	assert.Equal(t, expected, res)
 }
