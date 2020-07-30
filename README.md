@@ -1,3 +1,5 @@
+[![Coverage Status](https://coveralls.io/repos/github/johnmackenzie91/httptestfixtures/badge.svg?branch=master)](https://coveralls.io/github/johnmackenzie91/httptestfixtures?branch=master)
+
 # HTTP Test Fixtures
 
 The library converts a http response file;
