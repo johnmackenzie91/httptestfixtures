@@ -1,4 +1,6 @@
 [![Coverage Status](https://coveralls.io/repos/github/johnmackenzie91/httptestfixtures/badge.svg?branch=master)](https://coveralls.io/github/johnmackenzie91/httptestfixtures?branch=master)
+[![Build Status](https://travis-ci.org/johnmackenzie91/httptestfixtures.svg?branch=master)](https://travis-ci.org/johnmackenzie91/httptestfixtures)
+[![Go Report Card](https://goreportcard.com/badge/github.com/johnmackenzie91/httptestfixtures)](https://goreportcard.com/report/github.com/johnmackenzie91/httptestfixtures)
 
 # HTTP Test Fixtures
 
@@ -34,3 +36,7 @@ curl -i https://yourapi.com/endpointone > ./testdata/endpointone.txt
 Then use that response as a accurate representation of how your endpoint will respond and create a unit test around that.
 Please see the [examples](https://github.com/johnmackenzie91/httptestfixtures/tree/master/examples).
 
+## Social Media
+
+* [Twitter](https://twitter.com/JohnnMackk)
+* [LinkedIn](https://www.linkedin.com/in/john-mackenzie-web-developer/)
