@@ -2,12 +2,12 @@ package httptestfixtures
 
 import (
 	"bufio"
-	"fmt"
 	"io"
 	"io/ioutil"
 	"net/http"
 	"os"
 	"regexp"
+	"strconv"
 	"strings"
 	"testing"
 )
@@ -96,25 +96,24 @@ type statusCode struct {
 	Status     string
 }
 
-var rxStatusCode = regexp.MustCompile(`(HTTPS?)\/(\d\.?\d?)\ (\d+) ([A-Z]+)?`)
+var rxStatusCode = regexp.MustCompile(`(HTTPS?)\/(\d\.?\d?)\ (\d+)| ([A-Z]+)?`)
 
-func parseStatusCode(line string) (statusCode, error) {
+func parseStatusCode(line string) (sc statusCode, err error) {
 	b := rxStatusCode.FindAllStringSubmatch(line, -1)
-	if len(b[0]) != 5 {
-		return statusCode{}, ErrUnableToParseStatusCode
+
+	if len(b) >= 1 && len(b[0]) < 3 {
+		return sc, ErrUnableToParseStatusCode
 	}
-	fmt.Println(b[0][3])
+
 	out := statusCode{
 		Status: b[0][3],
 	}
 
-	fmt.Println(b)
-
-	switch b[0][3] {
-	case "200":
-		out.StatusCode = http.StatusOK
-		out.Status = "200 OK"
+	if out.StatusCode, err = strconv.Atoi(b[0][3]); err != nil {
+		return sc, err
 	}
+
+	out.Status = strconv.Itoa(out.StatusCode) + " " + http.StatusText(out.StatusCode)
 
 	return out, nil
 }
