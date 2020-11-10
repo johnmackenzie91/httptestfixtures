@@ -78,8 +78,8 @@ func (d Do) Do(r *http.Request) (*http.Response, error) {
 	return d.response, d.err
 }
 
-// DoerFromReader returns a struct that implements to Doer interface. Making it easier to mock http clients
-func DoerFromReader(r *http.Response, err error) Doer {
+// NewDoer returns a struct that implements to Doer interface. Making it easier to mock http clients
+func NewDoer(r *http.Response, err error) Doer {
 	return Do{
 		response: r,
 		err:      err,
