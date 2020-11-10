@@ -63,6 +63,29 @@ func ResponseFromReader(r io.Reader) (*http.Response, error) {
 	return &res, nil
 }
 
+// Doer fulfills the famous Do interface for http requests
+type Doer interface {
+	Do(r *http.Request) (*http.Response, error)
+}
+
+// Do implements to Doer interface above, give it a response and an error and it will return them
+type Do struct {
+	response *http.Response
+	err      error
+}
+
+func (d Do) Do(r *http.Request) (*http.Response, error) {
+	return d.response, d.err
+}
+
+// DoerFromReader returns a struct that implements to Doer interface. Making it easier to mock http clients
+func DoerFromReader(r *http.Response, err error) Doer {
+	return Do{
+		response: r,
+		err:      err,
+	}
+}
+
 // parseBody reads the remainder of the file and concatenates them together
 func parseBody(s *bufio.Scanner) io.ReadCloser {
 	var sb strings.Builder
