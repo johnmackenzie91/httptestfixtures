@@ -4,37 +4,46 @@
 
 # HTTP Test Fixtures
 
-The library converts a http response file;
+> Generate test fixtures that are real world responses!
 
+When writing an api client I want to make sure the test fixtures that I am developing against are as close to real life as possible.
+So why not use curl to capture real world responses and use them as test fixtures?
+
+
+1. Generate the test fixtures.
+```shell
+$  curl https://cat-api.com/cats/1 \
+     --include \
+     --output "${PATH}/cats_id_exists"
+     
+HTTP/2 200 
+server: nginx/1.18.0 (Ubuntu)
+date: Mon, 27 Sep 2021 15:49:44 GMT
+content-type: application/json; charset=UTF-8
+vary: Accept-Encoding
+access-control-allow-origin: *
+cache-control: public, max-age=3600
+
+{"data":{"id":1,"name":"Squeek","age":12}}
 ```
-HTTP/1.1 200 OK
-Date: Sun, 10 Oct 2010 23:26:07 GMT
 
-{"msg": "Hello world!"}
+2. Load the file into an *http.Response and set this to return from the mock.
+```shell
+func TestClient_GetCat_ID_Exists(t *testing.T) {
+    res := httptestfixtures.MustLoadRequest(t, "./testdata/cats_id_exists")
+    mockClient.On("Do", mock.Anything).Return(res, nil)
+  
+    // initialise the client
+    sut := API{
+      client: mockClient
+    }
+    
+    // run the function under test
+    out, err := sut.GetCat(1)
+    
+    // assert
+    //make your asertions
 ```
-
-Into a *http.Response struct;
-
-```
-&http.Response{
-		Status:     "200 OK",
-		StatusCode: 200,
-		Header: http.Header{
-			"Date": []string{"Sun, 10 Oct 2010 23:26:07 GMT"},
-		},
-		Body: ioutil.NopCloser(strings.NewReader(`{"msg": "Hello world!"}`)),
-	}
-``` 
-
-Allowing for easier unit testing of api clients.
-
-You can use curl to download to hit your api and download the entire response
-
-```
-curl -i https://yourapi.com/endpointone > ./testdata/endpointone.txt
-```
-Then use that response as a accurate representation of how your endpoint will respond and create a unit test around that.
-Please see the [examples](https://github.com/johnmackenzie91/httptestfixtures/tree/master/examples).
 
 ## Social Media
 
