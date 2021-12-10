@@ -96,6 +96,7 @@ func parseBody(s *bufio.Scanner) io.ReadCloser {
 	return ioutil.NopCloser(stringReader)
 }
 
+// header represents a header of a http request
 type header struct {
 	key   string
 	value string
